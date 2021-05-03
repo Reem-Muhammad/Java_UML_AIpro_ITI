@@ -16,6 +16,10 @@ public class MainClass{
     FileToList continentObj = new FileToList("countryContinent.txt");
     List<String[]> continentList= continentObj.convertFileToList();
 
+
+    FileToList capitalsObj = new FileToList("CapitalCountryContinent.txt");
+    List<String[]> capitalsList= capitalsObj.convertFileToList();
+
 /*
 //print continentList
     for(String[] x:citiesList) {
@@ -92,8 +96,21 @@ public class MainClass{
 */
 
 
-    //Inference obj = new Inference(citiesList, countryCityMap);
-    //obj.getHighestPopCityInCountry();
+//~~~~~~~~~~~ Generating a map that contains all capitals as a value (just to fit the functions in other classes) ~~~~~~~~~//
+    Map<String, List<String> > capitalsMap = new HashMap<String, List<String> >();
+    List<String> capitals = new ArrayList<String>();
+    for(String[] entry:capitalsList){
+      capitals.add(entry[1]); //extracts capitals
+    }
+    capitalsMap.put("All", capitals);
+
+/*
+//Print capitals
+    capitalsMap.forEach((continent, country) -> {
+        System.out.println(continent + " => " + country);
+    });
+*/
+
 
 //~~~~~~~~ Sorting cities in each country according to population ~~~~~~~~~~~//
     SortingAllKeys sortedCitiesObj = new SortingAllKeys(citiesList, countryCityMap);
@@ -110,7 +127,7 @@ public class MainClass{
     SortingAllKeys sortedCitiesOfContinentObj = new SortingAllKeys(citiesList, continentCityMap);
     Map<String, List<String> > continentCityMap_sorted = sortedCitiesOfContinentObj.sortCitiesAllCountries();
 
-
+/*
     //print sorted cities (according to population) for each continent
     System.out.println();
     System.out.println();
@@ -119,14 +136,26 @@ public class MainClass{
     continentCityMap_sorted.forEach((country, city) -> {
         System.out.println(country + " => " + city);
     });
+*/
 
+
+//~~~~~~~~~~~ Sorting capitals according to population ~~~~~~~~~~~~~//
+      SortingAllKeys sortedCapitalsObj = new SortingAllKeys(citiesList, capitalsMap);
+      Map<String, List<String> > capitalsMap_sorted = sortedCapitalsObj.sortCitiesAllCountries();
+
+/*
+//Print sorted capitals
+      capitalsMap_sorted.forEach((country, city) -> {
+          System.out.println(country + " => " + city);
+      });
+*/
 
 
 
 
 // ~~~~~~~~~~~ get highest population city in each country ~~~~~~~~~~~//
-    Inference countryObj = new Inference(citiesList, countryCityMap_sorted);
-    Map<String, String> highestPopulationCities_countries = countryObj.getHighestPopCityInCountries();
+    Inference country = new Inference(citiesList, countryCityMap_sorted);
+    Map<String, String> highestPopulationCities_countries = country.getHighestPopCityInCountries();
 
 /*
     //print countries with their highest population countries
@@ -137,13 +166,26 @@ public class MainClass{
 
 
 //~~~~~~~~~~~~~ get highest population city in each continent ~~~~~~~~~~~~~~~~//
-    Inference obj = new Inference(citiesList, continentCityMap_sorted);
-    Map<String, String> highestPopulationCities_continents = obj.getHighestPopCityInContinents();
+    Inference continent = new Inference(citiesList, continentCityMap_sorted);
+    Map<String, String> highestPopulationCities_continents = continent.getHighestPopCityInContinents();
 
     //print continents with their highest population cities
     for(String key:highestPopulationCities_continents.keySet()) {
         System.out.println(key + " => " + highestPopulationCities_continents.get(key));
     }
+
+
+
+//~~~~~~~~~~~~~ get highest population capital in all countries ~~~~~~~~~~~~~~~~//
+    Inference capital = new Inference(citiesList, capitalsMap_sorted);
+    Map<String, String> highestPopulationCapital_all = capital.getHighestPopCityInContinents();
+
+    //print continents with their highest population cities
+    for(String key:highestPopulationCapital_all.keySet()) {
+        System.out.println(key + " => " + highestPopulationCapital_all.get(key));
+}
+
+
   }
 
 }
