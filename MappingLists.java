@@ -35,16 +35,19 @@ public class MappingLists{
         //loop to extract cities corresponding to a certain country code
         List<String> valuesForKey = new ArrayList<String>();
         for (String[] value: valueFileList){  //value = [1, Kabul, 1780000, AFG]
-
+          //for(String x: value){System.out.print(x+"----");}
+          //System.out.println(value[3] +"    "+key_info[keyField_idx]);
           //Some entries have less elements due to missing columns
           try{
+            //System.out.println(key_info[keyField_idx]);
             if(Arrays.asList(value).contains(key_info[keyField_idx])){  //if code of the city is the same as country
                 valuesForKey.add(value[valueField_idx]); //append city name to list of cities
+                //System.out.println("append");
             }
               keyValueMap.put(key_info[keyField_idx], valuesForKey); //adds country and corresponding cities to map
           }
           catch (Exception e){
-
+            //System.out.println("out of index");
           }
 
 
