@@ -7,23 +7,25 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Collections;
 
-public class SortingPerCountry{
+public class SortingPerKey{
 
-  private List<String[]> citiesList;
-  private List<String> cities;
+  private List<String[]> citiesFileList; //used to find criteria for sorting the cities
+  private List<String> citiesToSort;
 
-  public SortingPerCountry(List<String[]> citiesList, List<String> cities){
-    this.cities = cities;
-    this.citiesList = citiesList;
+  //citiesFileList: the converted file
+  //cities: llist of cities to sort
+  public SortingPerKey(List<String[]> citiesFileList, List<String> citiesToSort){
+    this.citiesToSort = citiesToSort;
+    this.citiesFileList = citiesFileList;
   }
 
   public List<Integer> getPopulations(){
     List<Integer> citiesPopulation = new ArrayList<Integer>();
     //~~~~ Extract populations for  given cities ~~~~//
     //loop through the cities in that specific country
-    for(String city:cities){
+    for(String city:citiesToSort){
       //loop through all the list containing all cities with their info
-      for(String[] city_info: citiesList){
+      for(String[] city_info: citiesFileList){
           if(Arrays.asList(city_info).contains(city)){ //if a row in the full list contains the city name
             citiesPopulation.add(Integer.parseInt(city_info[2]));  //append population of that city (index 2 in the file) to a list
             break;
@@ -40,6 +42,9 @@ public class SortingPerCountry{
     */
   }
 
+/*
+sorts a list of cities passed in the constructor
+*/
   public List<String> sortCities(){
     List<String> cities_sorted = new ArrayList<String>();
     List<Integer> citiesPopulation_original = getPopulations();
@@ -52,7 +57,7 @@ public class SortingPerCountry{
       int pos = citiesPopulation_original.indexOf(population_sorted);
 
       //append corresponding cities so that they are put sorted
-      cities_sorted.add(cities.get(pos));
+      cities_sorted.add(citiesToSort.get(pos));
 
     }
 
