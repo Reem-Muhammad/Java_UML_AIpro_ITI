@@ -9,29 +9,45 @@ import java.util.Map;
 
 public class Inference{
   private List<String[]> citiesList;
-  private Map<String, List<String> > countryCityMap;
+  private Map<String, List<String> > keyValueMap;
 
-  public Inference(List<String[]> citiesList, Map<String, List<String> > countryCityMap){
+  public Inference(List<String[]> citiesList, Map<String, List<String> > keyValueMap){
     this.citiesList = citiesList;
-    this.countryCityMap = countryCityMap;
+    this.keyValueMap = keyValueMap;
   }
 
 
   public Map<String, String> getHighestPopCityInCountries(){
-    Map<String, String> highestPopulationCities = new HashMap<String, String>();
-    for(String key: this.countryCityMap.keySet()){
+    Map<String, String> highestPopulationCities_countries = new HashMap<String, String>();
+    for(String key: this.keyValueMap.keySet()){
       try{
-        highestPopulationCities.put(key, countryCityMap.get(key).get(0));
+        highestPopulationCities_countries.put(key, keyValueMap.get(key).get(0));
       }
       catch(Exception e){
         //if the key doesn't have cities in it, put empty string
-       highestPopulationCities.put(key, "");
+       highestPopulationCities_countries.put(key, "");
       }
 
     }
 
-    return highestPopulationCities;
+    return highestPopulationCities_countries;
   }
 
+
+  public Map<String, String> getHighestPopCityInContinents(){
+    Map<String, String> highestPopulationCities_continents = new HashMap<String, String>();
+    for(String key: this.keyValueMap.keySet()){
+      try{
+        highestPopulationCities_continents.put(key, keyValueMap.get(key).get(0));
+      }
+      catch(Exception e){
+        //if the key doesn't have cities in it, put empty string
+       highestPopulationCities_continents.put(key, "");
+      }
+
+    }
+
+    return highestPopulationCities_continents;
+  }
 
 }

@@ -83,12 +83,13 @@ public class MainClass{
 
     }
 
+/*
 //print continent-cities map
     System.out.println("================================");
     continentCityMap.forEach((continent, country) -> {
         System.out.println(continent + " => " + country);
     });
-
+*/
 
 
     //Inference obj = new Inference(citiesList, countryCityMap);
@@ -124,18 +125,25 @@ public class MainClass{
 
 
 // ~~~~~~~~~~~ get highest population city in each country ~~~~~~~~~~~//
-    Inference obj = new Inference(citiesList, countryCityMap_sorted);
-    Map<String, String> highestPopulationCities = obj.getHighestPopCityInCountries();
+    Inference countryObj = new Inference(citiesList, countryCityMap_sorted);
+    Map<String, String> highestPopulationCities_countries = countryObj.getHighestPopCityInCountries();
 
 /*
     //print countries with their highest population countries
     for(String key:highestPopulationCities.keySet()) {
-        System.out.println(key + " => " + highestPopulationCities.get(key));
+        System.out.println(key + " => " + highestPopulationCities_countries.get(key));
     }
 */
 
 
 //~~~~~~~~~~~~~ get highest population city in each continent ~~~~~~~~~~~~~~~~//
+    Inference obj = new Inference(citiesList, continentCityMap_sorted);
+    Map<String, String> highestPopulationCities_continents = obj.getHighestPopCityInContinents();
+
+    //print continents with their highest population cities
+    for(String key:highestPopulationCities_continents.keySet()) {
+        System.out.println(key + " => " + highestPopulationCities_continents.get(key));
+    }
   }
 
 }
