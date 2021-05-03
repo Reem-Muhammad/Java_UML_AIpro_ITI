@@ -11,7 +11,7 @@ public class MainClass{
     FileToList countriesObj = new FileToList("Countries.txt");
     List<String[]> countriesList= countriesObj.convertFileToList();
 
-    FileToList continentObj = new FileToList("CapitalCountryContinent.txt");
+    FileToList continentObj = new FileToList("countryContinent.txt");
     List<String[]> continentList= continentObj.convertFileToList();
 
 /*
@@ -31,11 +31,12 @@ public class MainClass{
 
     //Generating a map that contains continent name as key, and a list of its countries as value
     MappingLists continentCountryObj = new MappingLists();
-    Map<String, List<String> > continentCountryMap = continentCountryObj.generateMap(continentList, continentList, 5, 4);
+    Map<String, List<String> > continentCountryMap = continentCountryObj.generateMap(continentList, continentList, 5, 2);
 
     continentCountryMap.forEach((country, city) -> {
         System.out.println(country + " => " + city);
     });
+
 
 
 

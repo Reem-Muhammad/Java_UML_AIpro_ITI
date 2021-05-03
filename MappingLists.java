@@ -10,10 +10,11 @@ public class MappingLists{
 
 
   public Map<String, List<String> > generateMap(List<String[]> valueFileList, List<String[]> keyFileList, int keyField_idx, int valueField_idx){
+
 /*
-    for(String[] x: keyFileList){
+    for(String[] x: valueFileList){
       for(String y:x){
-        System.out.print(y+" ");
+        System.out.print(y+" ----");
       }
       System.out.println();
     }
@@ -35,10 +36,17 @@ public class MappingLists{
         List<String> valuesForKey = new ArrayList<String>();
         for (String[] value: valueFileList){  //value = [1, Kabul, 1780000, AFG]
 
-          if(Arrays.asList(value).contains(key_info[keyField_idx])){  //if code of the city is the same as country
-              valuesForKey.add(value[valueField_idx]); //append city name to list of cities
+          //Some entries have less elements due to missing columns
+          try{
+            if(Arrays.asList(value).contains(key_info[keyField_idx])){  //if code of the city is the same as country
+                valuesForKey.add(value[valueField_idx]); //append city name to list of cities
+            }
+              keyValueMap.put(key_info[keyField_idx], valuesForKey); //adds country and corresponding cities to map
           }
-            keyValueMap.put(key_info[keyField_idx], valuesForKey); //adds country and corresponding cities to map
+          catch (Exception e){
+
+          }
+
 
         //for(String x: value){System.out.print(x+" ");}
         //System.out.println();
