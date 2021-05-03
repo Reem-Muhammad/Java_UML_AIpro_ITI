@@ -11,7 +11,7 @@ public class MainClass{
     FileToList countriesObj = new FileToList("Countries.txt");
     List<String[]> countriesList= countriesObj.convertFileToList();
 
-    FileToList continentObj = new FileToList("CapitalCountryContinent.csv");
+    FileToList continentObj = new FileToList("CapitalCountryContinent.txt");
     List<String[]> continentList= continentObj.convertFileToList();
 
 /*
@@ -23,9 +23,20 @@ public class MainClass{
         System.out.println();
     }
 */
-
+    //Generating a map that contains country code as a key, and a list of its cities as a value
     MappingLists mapObj = new MappingLists();
-    Map<String, List<String> > countryCityMap = mapObj.generateMap(citiesList, countriesList);
+    Map<String, List<String> > countryCityMap = mapObj.generateMap(citiesList, countriesList, 0, 1);
+
+
+
+    //Generating a map that contains continent name as key, and a list of its countries as value
+    MappingLists continentCountryObj = new MappingLists();
+    Map<String, List<String> > continentCountryMap = continentCountryObj.generateMap(continentList, continentList, 5, 4);
+
+    continentCountryMap.forEach((country, city) -> {
+        System.out.println(country + " => " + city);
+    });
+
 
 
     //Inference obj = new Inference(citiesList, countryCityMap);

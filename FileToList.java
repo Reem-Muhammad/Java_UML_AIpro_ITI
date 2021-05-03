@@ -21,7 +21,7 @@ public class FileToList{
       //read line by line
       while( (line=br.readLine() ) != null){
         //convert each line to array of strings
-        convertedFile.add(line.split(", ")); //entries separated by commas followed by space
+        convertedFile.add(line.split(",")); //entries separated by commas followed by space
       }
     }
     catch (Exception e){
