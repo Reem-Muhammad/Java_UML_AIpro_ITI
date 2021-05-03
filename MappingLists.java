@@ -7,12 +7,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class MappingLists{
-  private String citiesFilePath;
-  private String countriesFilePath;
 
-  public Map<String, List<String> > generateMap(List<String[]> citiesList, List<String[]> countriesList, int keyField_idx, int valueField_idx){
+
+  public Map<String, List<String> > generateMap(List<String[]> valueFileList, List<String[]> keyFileList, int keyField_idx, int valueField_idx){
 /*
-    for(String[] x: countriesList){
+    for(String[] x: keyFileList){
       for(String y:x){
         System.out.print(y+" ");
       }
@@ -20,32 +19,32 @@ public class MappingLists{
     }
 */
 
-    Map<String, List<String> > countryCityMap = new HashMap();
+    Map<String, List<String> > keyValueMap = new HashMap();
 
     //Fill in the map
-    Iterator<String[]> country_iter = countriesList.iterator();
+    Iterator<String[]> keys_iter = keyFileList.iterator();
 
-    while (country_iter.hasNext()) {
-        String[] country_info = country_iter.next();  // country_info=[SYC, Seychelles, 77000]
+    while (keys_iter.hasNext()) {
+        String[] key_info = keys_iter.next();  // key_info=[SYC, Seychelles, 77000]
 
-        //for(String x: country_info){System.out.print(x+"----");}
+        //for(String x: key_info){System.out.print(x+"----");}
         //System.out.println();
 
 
         //loop to extract cities corresponding to a certain country code
-        List<String> citiesOfCountry = new ArrayList<String>();
-        for (String[] city: citiesList){  //city = [1, Kabul, 1780000, AFG]
+        List<String> valuesForKey = new ArrayList<String>();
+        for (String[] value: valueFileList){  //value = [1, Kabul, 1780000, AFG]
 
-          if(Arrays.asList(city).contains(country_info[keyField_idx])){  //if code of the city is the same as country
-            citiesOfCountry.add(city[valueField_idx]); //append city name to list of cities
+          if(Arrays.asList(value).contains(key_info[keyField_idx])){  //if code of the city is the same as country
+              valuesForKey.add(value[valueField_idx]); //append city name to list of cities
           }
-          countryCityMap.put(country_info[keyField_idx], citiesOfCountry); //adds country and corresponding cities to map
+            keyValueMap.put(key_info[keyField_idx], valuesForKey); //adds country and corresponding cities to map
 
-        //for(String x: city){System.out.print(x+" ");}
+        //for(String x: value){System.out.print(x+" ");}
         //System.out.println();
         }
       }
-  return countryCityMap;
+  return keyValueMap;
   }
 
 }
