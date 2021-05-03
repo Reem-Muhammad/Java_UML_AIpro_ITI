@@ -11,6 +11,19 @@ public class MainClass{
     FileToList countriesObj = new FileToList("Countries.txt");
     List<String[]> countriesList= countriesObj.convertFileToList();
 
+    FileToList continentObj = new FileToList("CapitalCountryContinent.csv");
+    List<String[]> continentList= continentObj.convertFileToList();
+
+/*
+//print continentList
+    for(String[] x:continentList) {
+      for (String y:x){
+        System.out.print(y+"  ");
+      }
+        System.out.println();
+    }
+*/
+
     MappingLists mapObj = new MappingLists();
     Map<String, List<String> > countryCityMap = mapObj.generateMap(citiesList, countriesList);
 
@@ -21,6 +34,7 @@ public class MainClass{
     SortingAllCountries sortedCitiesObj = new SortingAllCountries(citiesList, countryCityMap);
     Map<String, List<String> > countryCityMap_sorted = sortedCitiesObj.sortCitiesAllCountries();
 
+/*
     //print sorted cities (according to population) for each country
     countryCityMap_sorted.forEach((country, city) -> {
         System.out.println(country + " => " + city);
@@ -30,11 +44,12 @@ public class MainClass{
     Inference obj = new Inference(citiesList, countryCityMap_sorted);
     Map<String, String> highestPopulationCities = obj.getHighestPopCityInCountries();
 
+/*
     //print countries with their highest population countries
     for(String key:highestPopulationCities.keySet()) {
         System.out.println(key + " => " + highestPopulationCities.get(key));
     }
-
+*/
   }
 
 }
