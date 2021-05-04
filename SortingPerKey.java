@@ -22,8 +22,7 @@ public class SortingPerKey{
   public List<Integer> getPopulations(){
     List<Integer> citiesPopulation = new ArrayList<Integer>();
     //~~~~ Extract populations for  given cities ~~~~//
-    //loop through the cities in that specific country
-    for(String city:citiesToSort){
+    for(String city:citiesToSort){   //loop through the cities in that specific country
       //loop through all the list containing all cities with their info
       for(String[] city_info: citiesFileList){
           if(Arrays.asList(city_info).contains(city)){ //if a row in the full list contains the city name
@@ -33,13 +32,6 @@ public class SortingPerKey{
       }
     }
     return citiesPopulation;
-
-/*
-//Print populations for cities in a  country
-    for(String c:citiesPopulation){
-      System.out.println(c);
-    }
-    */
   }
 
 /*

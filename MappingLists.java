@@ -8,17 +8,13 @@ import java.util.Map;
 
 public class MappingLists{
 
-
-  public Map<String, List<String> > generateMap(List<String[]> valueFileList, List<String[]> keyFileList, int keyField_idx, int valueField_idx){
-
 /*
-    for(String[] x: valueFileList){
-      for(String y:x){
-        System.out.print(y+" ----");
-      }
-      System.out.println();
-    }
+keyFileList: a list (converted file) that contains entries to be put as kays in the map
+valueFileList: a list (converted file) that contains entries to be put as values in the map
+keyField_idx: column (in keyFileList) from which the keys will be extracted
+valueField_idx: column (in valueFileList) from which the values will be extracted
 */
+  public Map<String, List<String> > generateMap(List<String[]> valueFileList, List<String[]> keyFileList, int keyField_idx, int valueField_idx){
 
     Map<String, List<String> > keyValueMap = new HashMap();
 
@@ -26,33 +22,22 @@ public class MappingLists{
     Iterator<String[]> keys_iter = keyFileList.iterator();
 
     while (keys_iter.hasNext()) {
-        String[] key_info = keys_iter.next();  // key_info=[SYC, Seychelles, 77000]
-
-        //for(String x: key_info){System.out.print(x+"----");}
-        //System.out.println();
+        String[] key_info = keys_iter.next();
 
 
         //loop to extract cities corresponding to a certain country code
         List<String> valuesForKey = new ArrayList<String>();
-        for (String[] value: valueFileList){  //value = [1, Kabul, 1780000, AFG]
-          //for(String x: value){System.out.print(x+"----");}
-          //System.out.println(value[3] +"    "+key_info[keyField_idx]);
+        for (String[] value: valueFileList){
+
           //Some entries have less elements due to missing columns
           try{
-            //System.out.println(key_info[keyField_idx]);
             if(Arrays.asList(value).contains(key_info[keyField_idx])){  //if code of the city is the same as country
                 valuesForKey.add(value[valueField_idx]); //append city name to list of cities
-                //System.out.println("append");
             }
               keyValueMap.put(key_info[keyField_idx], valuesForKey); //adds country and corresponding cities to map
           }
           catch (Exception e){
-            //System.out.println("out of index");
           }
-
-
-        //for(String x: value){System.out.print(x+" ");}
-        //System.out.println();
         }
       }
   return keyValueMap;

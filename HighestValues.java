@@ -7,12 +7,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class Inference{
-  private List<String[]> citiesList;
+public class HighestValues{
   private Map<String, List<String> > keyValueMap;
 
-  public Inference(List<String[]> citiesList, Map<String, List<String> > keyValueMap){
-    this.citiesList = citiesList;
+  public HighestValues(Map<String, List<String> > keyValueMap){
     this.keyValueMap = keyValueMap;
   }
 
